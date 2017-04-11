@@ -14,7 +14,8 @@ PROTO_PROTOC=protoc
 PROTO_PATH=.
 PROTO_PROTO=proto
 
-CPP_TARGET=natural_language
+CPP_TARGET=test
+NL_CLASS=natural_language
 
 GRPC_CPP_PLUGIN = grpc_cpp_plugin
 GRPC_CPP_PLUGIN_PATH ?= `which $(GRPC_CPP_PLUGIN)`
@@ -25,10 +26,10 @@ PROTOS_PATH = .
 vpath %.proto $(PROTOS_PATH)
 
 
-all: system-check $(CPP_TARGET)
+all: system-check $(NL_CLASS)
 
-$(CPP_TARGET): $(PROTO_TARGET).pb.o $(PROTO_TARGET).grpc.pb.o  $(CPP_TARGET).o
-	$(CXX) $(CXXFLAGS)  $^ $(LDFLAGS)  -o $@
+$(NL_CLASS): $(PROTO_TARGET).pb.o $(PROTO_TARGET).grpc.pb.o $(NL_CLASS).o $(NL_CLASS).h $(CPP_TARGET).o
+	$(CXX) $(CXXFLAGS) $^ $(LDFLAGS)  -o $@
 
 .PRECIOUS: %.grpc.pb.cc
 %.grpc.pb.cc: %.proto
@@ -39,7 +40,7 @@ $(CPP_TARGET): $(PROTO_TARGET).pb.o $(PROTO_TARGET).grpc.pb.o  $(CPP_TARGET).o
 	$(PROTO_PROTOC) -I $(PROTOS_PATH) --cpp_out=. $(PROTO_TARGET).proto
 
 clean:
-	$(RM) $(CPP_TARGET) *.o *.pb.cc *.pb.h
+	$(RM) $(NL_CLASS) $(CPP_TARGET) *.o *.pb.cc *.pb.h
 
 
 

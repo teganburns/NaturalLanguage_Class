@@ -1,12 +1,15 @@
-#include "natural_language.cpp"
-
+#include "natural_language.h"
+#include <iostream>
+#include <ctime>
 
 int main (){
 
     system("clear");
 
-    NL lang; 
-/*
+    //std::cout << "Time: " << std::time(0) << std::endl;
+
+    NL Lang;
+
     int request_type;
 
     std::cout
@@ -21,16 +24,16 @@ int main (){
 
     switch ( request_type ) {
         case 1:
-            AnalyzeEntities();
+            Lang.AnalyzeEntities();
             break;
         case 2:
-            AnalyzeSentiment();
+            Lang.AnalyzeSentiment();
             break;
         case 3:
-            AnalyzeSyntax();
+            Lang.AnalyzeSyntax();
             break;
         case 4:
-            AnnotateText();
+            Lang.AnnotateText();
             break;
         default:
             std::cout << "Selection \"" << request_type << "\" is not valid." << std::endl;
@@ -38,7 +41,6 @@ int main (){
             break;
     
     } 
-*/
 
     std::cout << "\nAll Finished!" << std::endl;
 
